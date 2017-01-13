@@ -1,20 +1,41 @@
+// Import Vue.js
+import Vue from 'vue';
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * include Vue and Vue Resource. This gives a great starting point for
- * building robust, powerful web applications using Vue and Laravel.
- */
+// Import Plugins
+import VueResource from 'vue-resource';
+import VueRouter from 'vue-router';
+import Vuex from 'vuex';
 
-require('./bootstrap');
+// Import Components
+import Example from './components/Example.vue';
+import NotFound from './components/NotFound.vue';
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the body of the page. From here, you may begin adding components to
- * the application, or feel free to tweak this setup for your needs.
- */
+// Tell Vue to use the plugins
+Vue.use(VueResource);
+Vue.use(VueRouter);
+Vue.use(Vuex);
 
-Vue.component('example', require('./components/Example.vue'));
-
-const app = new Vue({
-    el: 'main'
+// Configure VueResource to push up Laravel's csrfToken
+Vue.http.interceptors.push((request, next) => {
+    request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+    next();
 });
+
+// Define the routes
+const routes = [
+    { path: '/example', component: Example },
+
+    // The catch-all route
+    { path: '*', component: NotFound },
+];
+
+// Setup the router
+const router = new VueRouter({
+    mode: 'history',
+    routes,
+});
+
+// Create and mount the application
+const app = new Vue({
+    router,
+}).$mount('main');

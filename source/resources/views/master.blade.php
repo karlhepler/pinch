@@ -19,7 +19,11 @@
         <![endif]-->
 
         <main>
-            <example></example>
+            <h1>Pinch</h1>
+            <ul>
+                <li><router-link to="/example">Go To Example</router-link></li>
+            </ul>
+            <router-view></router-view>
         </main>
 
         <script src="{{ asset('js/pinch.js') }}"></script>
