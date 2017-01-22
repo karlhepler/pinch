@@ -7,7 +7,7 @@ import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 
 // Import Components
-import Example from './components/Example.vue';
+import Registration from './components/Registration.vue';
 import NotFound from './components/NotFound.vue';
 
 // Tell Vue to use the plugins
@@ -23,7 +23,7 @@ Vue.http.interceptors.push((request, next) => {
 
 // Define the routes
 const routes = [
-    { path: '/example', component: Example },
+    { path: '/registration', component: Registration },
 
     // The catch-all route
     { path: '*', component: NotFound },

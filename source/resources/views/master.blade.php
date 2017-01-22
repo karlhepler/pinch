@@ -23,6 +23,7 @@
             <ul>
                 <li><router-link to="/example">Go To Example</router-link></li>
             </ul>
+            <hr>
             <router-view></router-view>
         </main>
 
