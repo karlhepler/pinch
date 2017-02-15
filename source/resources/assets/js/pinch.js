@@ -2,22 +2,26 @@
 import Vue from 'vue';
 
 // Import Plugins
-import VueResource from 'vue-resource';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
+import VueCookie from 'vue-cookie';
+import VueMask from 'v-mask';
+import VeeValidate from 'vee-validate';
 
 // Import Components
 import Registration from './components/Registration.vue';
 import NotFound from './components/NotFound.vue';
 
 // Tell Vue to use the plugins
-Vue.use(VueResource);
 Vue.use(VueRouter);
 Vue.use(Vuex);
+Vue.use(VueCookie);
+Vue.use(VueMask);
+Vue.use(VeeValidate);
 
 // Configure VueResource to push up Laravel's csrfToken
 Vue.http.interceptors.push((request, next) => {
-    request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+    request.headers.set('X-CSRF-TOKEN', Vue.cookie.get('XSRF-TOKEN'));
     next();
 });
 
